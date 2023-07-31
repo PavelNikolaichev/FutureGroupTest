@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Casts;
 
 class Notebook extends Model
 {
@@ -21,8 +20,5 @@ class Notebook extends Model
 
     protected $casts = [
         'date_of_birth' => 'date',
-        'email' => Casts\Email::class,
-        'phone' => Casts\Phone::class,
-        'photo' => Casts\Image::class,
     ];
 }

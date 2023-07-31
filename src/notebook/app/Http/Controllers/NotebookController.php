@@ -5,82 +5,77 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreNotebookRequest;
 use App\Http\Requests\UpdateNotebookRequest;
 use App\Models\Notebook;
+use http\Env\Response;
+use Illuminate\Http\JsonResponse;
 
 class NotebookController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
-    }
+        $notes = Notebook::paginate(10);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json($notes);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreNotebookRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreNotebookRequest $request
+     * @return JsonResponse
      */
-    public function store(StoreNotebookRequest $request)
+    public function store(StoreNotebookRequest $request): JsonResponse
     {
-        //
+        $validated_data = $request->validate([
+
+        ]);
+
+        $note = Notebook::create($validated_data);
+
+        return response()->json($note, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Notebook  $notebook
-     * @return \Illuminate\Http\Response
+     * @param Notebook $notebook
+     * @return JsonResponse
      */
-    public function show(Notebook $notebook)
+    public function show(Notebook $notebook): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Notebook  $notebook
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Notebook $notebook)
-    {
-        //
+        return response()->json($notebook);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateNotebookRequest  $request
-     * @param  \App\Models\Notebook  $notebook
-     * @return \Illuminate\Http\Response
+     * @param UpdateNotebookRequest $request
+     * @param Notebook $notebook
+     * @return JsonResponse
      */
-    public function update(UpdateNotebookRequest $request, Notebook $notebook)
+    public function update(UpdateNotebookRequest $request, Notebook $notebook): JsonResponse
     {
-        //
+        $validated_data = $request->validate([]);
+
+        $notebook->update($validated_data);
+
+        return response()->json($notebook);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Notebook  $notebook
-     * @return \Illuminate\Http\Response
+     * @param Notebook $notebook
+     * @return JsonResponse
      */
-    public function destroy(Notebook $notebook)
+    public function destroy(Notebook $notebook): JsonResponse
     {
-        //
+        $notebook->delete();
+
+        return response()->json(null, 204);
     }
 }

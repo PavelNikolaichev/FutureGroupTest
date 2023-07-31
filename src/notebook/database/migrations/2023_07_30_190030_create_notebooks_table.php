@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('notebooks', function (Blueprint $table) {
             $table->id();
+            $table->string('full_name');
+            $table->string('company')->nullable();
+            $table->string('phone');
+            $table->string('email');
+            $table->date('date_of_birth')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }
