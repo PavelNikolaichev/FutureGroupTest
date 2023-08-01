@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreNotebookRequest;
 use App\Http\Requests\UpdateNotebookRequest;
 use App\Models\Notebook;
-use http\Env\Response;
 use Illuminate\Http\JsonResponse;
 
 class NotebookController extends Controller
@@ -30,9 +29,12 @@ class NotebookController extends Controller
      */
     public function store(StoreNotebookRequest $request): JsonResponse
     {
-        $validated_data = $request->validate([
+        $validated_data = $request->validated();
 
-        ]);
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('photos', 'public');
+            $validated_data['photo'] = $photoPath;
+        }
 
         $note = Notebook::create($validated_data);
 
@@ -59,7 +61,12 @@ class NotebookController extends Controller
      */
     public function update(UpdateNotebookRequest $request, Notebook $notebook): JsonResponse
     {
-        $validated_data = $request->validate([]);
+        $validated_data = $request->validated();
+
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('photos', 'public');
+            $validated_data['photo'] = $photoPath;
+        }
 
         $notebook->update($validated_data);
 
