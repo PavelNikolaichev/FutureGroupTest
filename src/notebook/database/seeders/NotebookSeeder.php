@@ -14,6 +14,6 @@ class NotebookSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Notebook::factory(10)->create();
     }
 }

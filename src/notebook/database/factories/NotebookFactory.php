@@ -17,7 +17,12 @@ class NotebookFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'full_name' => $this->faker->name(),
+            'company' => $this->faker->company(),
+            'phone' => $this->faker->phoneNumber(),
+            'email' => $this->faker->email(),
+            'date_of_birth' => $this->faker->date(),
+            'photo' => $this->faker->imageUrl(), // a lil bit different, but still legit.
         ];
     }
 }
