@@ -20,6 +20,28 @@ To run tests, you can use artisan(yeah, again):
 ```bash
 php artisan test
 ```
+For testing, I have used laravel tests and Postman.\
+If you're going to be using Postman too, make sure to set the following header:
+```
+X-Requested-With: XMLHttpRequest
+```
+All API endpoints are the same as in the original description:
+
+     1.1. GET /api/v1/notebook/
+     1.2. POST /api/v1/notebook/
+     1.3. GET /api/v1/notebook/<id>/
+     1.4. POST /api/v1/notebook/<id>/
+     1.5. DELETE /api/v1/notebook/<id>/
+     1.6  GET /swagger/documentation - Swagger
+
+Fields for POST requests:
+
+    1. full_name (required)
+    2. company
+    3. phone (required)
+    4. email (required)
+    5. date_of_birth
+    6. photo
 
 ## Troubleshoot
 Don't forget to change db credentials, if you set up it differently.\
